@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
@@ -25,13 +24,21 @@ public class StickerGenerator {
 
 
         //configure font
-        var font = new Font(Font.SANS_SERIF, Font.BOLD, 64);
+        var font = new Font("Impact", Font.BOLD, 20);
         graphics.setColor(Color.YELLOW);
         graphics.setFont(font);
 
 
         //write a sentence on the new image
-        graphics.drawString("TOPZERA", 0, newHeight-100);
+        String text = "TOPZERA";
+
+        FontMetrics fontMetrics = graphics.getFontMetrics();
+        Rectangle2D rectangle2D =  fontMetrics.getStringBounds(text, graphics);
+
+        int textWidth = (int) rectangle2D.getWidth();
+        int textPosition = (width - textWidth)/2;
+
+        graphics.drawString(text, textPosition, newHeight-100);
 
 
         //write the new image to a file
