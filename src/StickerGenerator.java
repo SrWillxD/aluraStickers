@@ -31,7 +31,7 @@ public class StickerGenerator {
 
 
         //write a sentence on the new image
-        graphics.drawString("TOPZERA", 400, newHeight-100);
+        graphics.drawString("TOPZERA", 0, newHeight-100);
 
 
         //write the new image to a file
