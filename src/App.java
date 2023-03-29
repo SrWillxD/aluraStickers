@@ -23,9 +23,13 @@ public class App {
 
         // Manipulate and show data
         for(Map<String, String> movie : movieList){
-            System.out.println(movie.get("title"));
-            System.out.println(movie.get("image"));
-            System.out.println(movie.get("imDbRating"));
+            System.out.println("\u001b[1mTittle:\u001b[m "+movie.get("title"));
+            System.out.println("\u001b[1mPoster:\u001b[m "+movie.get("image"));
+            double classification = Double.parseDouble(movie.get("imDbRating"));
+            int stars = (int) classification;
+            for (int i = 0; i <stars; i++) {
+                System.out.print("⭐");
+            }
             System.out.println(" ");
         }
     }
