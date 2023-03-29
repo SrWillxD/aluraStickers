@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.io.InputStream;
 import java.net.URL;
+import java.io.File;
 
 public class App {
     public static void main(String[] args)throws Exception{
@@ -25,13 +26,16 @@ public class App {
 
         // Manipulate and show data
         var maker = new StickerGenerator();
+        var dir = new File("output/");
+        dir.mkdir();
         for(Map<String, String> movie : movieList){
 
             String urlImage = movie.get("image");
             String title = movie.get("title");
 
+
             InputStream inputStream = new URL(urlImage).openStream();
-            String fileName = title + ".png";
+            String fileName ="output/" + title + ".png";
 
 
             maker.make(inputStream, fileName);
