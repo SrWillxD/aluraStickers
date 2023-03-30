@@ -11,44 +11,32 @@ import java.io.File;
 public class App {
     public static void main(String[] args)throws Exception{
         // Make a https connection and grab the top 250 movies
-        String url = "https://imdb-api.com/en/API/Top250Movies/" + System.getenv("API_KEY");
-        var uri = URI.create(url);
-        var client = HttpClient.newHttpClient();
-        var request = HttpRequest.newBuilder(uri).GET().build();
-        var response = client.send(request, BodyHandlers.ofString());
-        String body = response.body();
 
+//        String url = "https://imdb-api.com/en/API/Top250Movies/" + System.getenv("API_KEY");
+//        ContentExtractor extractor = new ImdbContentExtractor();
 
-        // Extract only important fields (title, poster, rating)
-        var parser = new JsonParser();
-        List<Map<String, String>> movieList = parser.parse(body);
+        String url = "https://api.nasa.gov/planetary/apod?api_key=5mBDGFbUpodug0xoRNkSGyoxkAROTI6DGNXrhnTT&start_date=2022-06-12&end_date=2022-06-14";
+        ContentExtractor extractor = new NasaContentExtractor();
 
+        var http = new ClientHttp();
+        String json = http.searchData(url);
 
         // Manipulate and show data
+
+        List<Content> contents=  extractor.extractContent(json);
+
         var maker = new StickerGenerator();
         var dir = new File("output/");
         dir.mkdir();
-        for(Map<String, String> movie : movieList){
+        for(int i =0; i<3; i++ ){
+            Content content = contents.get(i);
 
-            String urlImage = movie.get("image");
-            String title = movie.get("title");
-
-
-            InputStream inputStream = new URL(urlImage).openStream();
-            String fileName ="output/" + title + ".png";
-
+            InputStream inputStream = new URL(content.getUrlImage()).openStream();
+            String fileName ="output/" + content.getTitle() + ".png";
 
             maker.make(inputStream, fileName);
 
-            System.out.println("\u001b[1mTittle:\u001b[m "+movie.get("title"));
-            System.out.println("\u001b[1mPoster:\u001b[m "+movie.get("image"));
-            double classification = Double.parseDouble(movie.get("imDbRating"));
-            int stars = (int) classification;
-
-            for (int i = 0; i <stars; i++) {
-                System.out.print("⭐");
-            }
-            System.out.println(" ");
+            System.out.println(content.getTitle());
         }
     }
 }
