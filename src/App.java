@@ -1,9 +1,4 @@
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
-import java.util.Map;
 import java.io.InputStream;
 import java.net.URL;
 import java.io.File;
@@ -15,8 +10,11 @@ public class App {
 //        String url = "https://imdb-api.com/en/API/Top250Movies/" + System.getenv("API_KEY");
 //        ContentExtractor extractor = new ImdbContentExtractor();
 
-        String url = "https://api.nasa.gov/planetary/apod?api_key=5mBDGFbUpodug0xoRNkSGyoxkAROTI6DGNXrhnTT&start_date=2022-06-12&end_date=2022-06-14";
-        ContentExtractor extractor = new NasaContentExtractor();
+//        String url = "https://api.nasa.gov/planetary/apod?api_key=5mBDGFbUpodug0xoRNkSGyoxkAROTI6DGNXrhnTT&start_date=2022-06-12&end_date=2022-06-14";
+//        ContentExtractor extractor = new NasaContentExtractor();
+
+        String url = "http://localhost:8080/linguagens";
+        ContentExtractor extractor = new ImdbContentExtractor();
 
         var http = new ClientHttp();
         String json = http.searchData(url);
@@ -28,7 +26,7 @@ public class App {
         var maker = new StickerGenerator();
         var dir = new File("output/");
         dir.mkdir();
-        for(int i =0; i<3; i++ ){
+        for(int i =0; i<2; i++ ){
             Content content = contents.get(i);
 
             InputStream inputStream = new URL(content.getUrlImage()).openStream();
