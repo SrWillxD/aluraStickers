@@ -14,12 +14,8 @@ public class ClientHttp {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             String body = response.body();
             return body;
-
         } catch (IOException | InterruptedException ex){
             throw new RuntimeException(ex);
         }
-
-
-
     }
 }

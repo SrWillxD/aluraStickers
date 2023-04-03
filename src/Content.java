@@ -1,5 +1,4 @@
 public class Content {
-
     private final String title;
     private final String urlImage;
 
@@ -8,11 +7,7 @@ public class Content {
         this.urlImage=urlImage;
     }
 
-    public String getTitle(){
-        return title;
-    }
+    public String getTitle(){return title;}
 
-    public String getUrlImage() {
-        return urlImage;
-    }
+    public String getUrlImage() {return urlImage;}
 }

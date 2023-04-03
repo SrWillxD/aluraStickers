@@ -9,11 +9,9 @@ public class JsonParser {
     private static final Pattern REGEX_ITEMS = Pattern.compile(".*\\[(.+)].*");
     private static final Pattern REGEX_ATTRIBUTES_JSON = Pattern.compile("\"(.+?)\":\"(.*?)\"");
     public List<Map<String, String>> parse(String json){
-
         Matcher matcher = REGEX_ITEMS.matcher(json);
-        if (!matcher.find()) {
-            throw new IllegalArgumentException("Item not find.");
-        }
+
+        if (!matcher.find()) {throw new IllegalArgumentException("Item not find.");}
 
         String[] items = matcher.group(1).split("},\\{");
 
@@ -23,6 +21,7 @@ public class JsonParser {
             Map<String, String> attributesItem = new HashMap<>();
 
             Matcher matcherAttributesJson = REGEX_ATTRIBUTES_JSON.matcher(item);
+
             while (matcherAttributesJson.find()) {
                 String attribute = matcherAttributesJson.group(1);
                 String valor = matcherAttributesJson.group(2);

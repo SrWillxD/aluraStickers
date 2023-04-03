@@ -27,20 +27,20 @@ public class StickerGenerator {
 
 
         //configure font
-        var font = new Font("Impact", Font.BOLD, 64);
+        var font = new Font("Impact", Font.BOLD, 65);
         graphics.setColor(Color.YELLOW);
         graphics.setFont(font);
 
 
         //write a sentence on the new image
-        String text = "TOPZERA";
+        String text = "";
 
         FontMetrics fontMetrics = graphics.getFontMetrics();
         Rectangle2D rectangle2D =  fontMetrics.getStringBounds(text, graphics);
 
         int textWidth = (int) rectangle2D.getWidth();
         int textPositionX = (width - textWidth)/2;
-        int textPositionY = newHeight-100;
+        int textPositionY = newHeight-90;
         graphics.drawString(text, textPositionX, textPositionY);
 
         FontRenderContext fontRenderContext = graphics.getFontRenderContext();

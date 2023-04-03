@@ -7,14 +7,14 @@ public class App {
     public static void main(String[] args)throws Exception{
         // Make a https connection and grab the top 250 movies
 
-//        String url = "https://imdb-api.com/en/API/Top250Movies/" + System.getenv("API_KEY");
-//        ContentExtractor extractor = new ImdbContentExtractor();
+        String url = System.getenv("IMDB-KEY");
+        ContentExtractor extractor = new ImdbContentExtractor();
 
-//        String url = "https://api.nasa.gov/planetary/apod?api_key=5mBDGFbUpodug0xoRNkSGyoxkAROTI6DGNXrhnTT&start_date=2022-06-12&end_date=2022-06-14";
+//        String url = System.getenv("NASA-URL");
 //        ContentExtractor extractor = new NasaContentExtractor();
 
-        String url = "http://localhost:8080/linguagens";
-        ContentExtractor extractor = new ImdbContentExtractor();
+//        String url = "http://localhost:8080/linguagens";
+//        ContentExtractor extractor = new ImdbContentExtractor();
 
         var http = new ClientHttp();
         String json = http.searchData(url);
@@ -26,7 +26,7 @@ public class App {
         var maker = new StickerGenerator();
         var dir = new File("output/");
         dir.mkdir();
-        for(int i =0; i<2; i++ ){
+        for(int i =0; i<250; i++ ){
             Content content = contents.get(i);
 
             InputStream inputStream = new URL(content.getUrlImage()).openStream();
@@ -34,6 +34,7 @@ public class App {
 
             maker.make(inputStream, fileName);
 
+            System.out.println(i);
             System.out.println(content.getTitle());
         }
     }
