@@ -7,8 +7,8 @@ public class App {
     public static void main(String[] args)throws Exception{
         // Make a https connection and grab the top 250 movies
 
-        String url = System.getenv("IMDB-KEY");
-        ContentExtractor extractor = new ImdbContentExtractor();
+//        String url = System.getenv("IMDB-KEY");
+//        ContentExtractor extractor = new ImdbContentExtractor();
 
 //        String url = System.getenv("NASA-URL");
 //        ContentExtractor extractor = new NasaContentExtractor();
